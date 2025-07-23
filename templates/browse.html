@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    {{category}}
+{% endblock %}
+
+{% block main %}
+    <h2>{{category}}</h2>
+    <p>{{description}}</p>
+    {% for item in items %}
+        <div class="{{category}}">
+            <h3>{{ item.name }}</h3>
+            <p>{{ item.description | default('No description provided.', true)}}</p>
+            <p>Price: {{ item.price | usd }}</p>
+            <button>Add to Cart</button>
+            <button><a href='/items/{{ item.name | slugify }}'>View Details</a></button>
+            {% if item.image %}
+                <img src="{{ item.image }}" alt="{{ item.name }}">
+            {% else %}
+                <p>No image available.</p>
+            {% endif %}
+        </div>
+    {% endfor %}
+{% endblock %}

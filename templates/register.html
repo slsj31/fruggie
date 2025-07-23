@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Register
+{% endblock %}
+
+{% block main %}
+    <h2>Register</h2>
+    <h3>Create an account to place orders on this site!</h3>      
+    <p>
+        Note: You can't pay through the site directly just yet. 
+        When you have placed an order and have talked to us in person, 
+        we'll keep records of your order and send you status updates via email.
+    </p>
+        </a></p>
+    <form action="/register" method="post">
+        <div class="mb-3">
+            <input autocomplete="off" autofocus class="form-control mx-auto w-auto" name="email" placeholder="Email" type="email">
+        </div>
+        <div class="mb-3">
+            <input autocomplete="off" autofocus name="username" placeholder="Username" type="text">
+        </div>
+        <div class="mb-3">
+            <input name="password" placeholder="Password" type="password">
+        </div>
+        <div class="mb-3">
+            <input name="confirmation" placeholder="Confirm Password" type="password">
+        </div>
+        <button class="btn btn-primary" type="submit">Log In</button>
+    </form>
+    <p id="error">Error: {{error}}</p>
+{% endblock %}

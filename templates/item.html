@@ -1,0 +1,20 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    {{ item.name|capitalize }}
+{% endblock %}
+
+{% block main %}
+
+    <h1>{{ item.name }}</h1>
+    <p>{{ item.description | default('No description provided.', true) }}</p>
+    <p>Price: {{ item.price | usd}}</p>
+    <button>Add to Cart</button>
+    
+    {% if item.image %}
+        <img src="{{ item.image }}" alt="{{ item.name }}">
+    {% else %}
+        <p>No image available.</p>
+    {% endif %} 
+
+{% endblock %}
