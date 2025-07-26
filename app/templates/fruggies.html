@@ -1,0 +1,38 @@
+{% extends "layout.html" %} 
+
+{% block title %} {{category}} {% endblock %} 
+
+{%block main %}
+    <h2>{{category}}</h2>
+    <p>{{description}}</p>
+    <div class="row">
+        {% for fruggie in fruggies %}
+            <div class="col-md-3">
+                <div class="card">
+                    {% if fruggie.image %}
+                        <img
+                            src="{{ fruggie.image }}"
+                            class="card-img-top"
+                            alt="{{ fruggie.name }}"
+                        />
+                    {% else %}
+                        <p>No image available.</p>
+                    {% endif %}
+                    <div class="card-body">
+                        <h5 class="card-title">{{ fruggie.name }}</h5>
+                        <p class="card-text">
+                            {{ fruggie.description | default('No description provided.',
+                            true)}}
+                        </p>
+                        <a
+                            class="btn btn-primary"
+                            href="/fruggies/{{ fruggie.name | slugify }}"
+                            role="button"
+                            >{{ fruggie.price | usd }}</a
+                        >
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

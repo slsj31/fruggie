@@ -1,32 +1,51 @@
-{% extends "layout.html" %}
+{% extends "layout.html" %} 
 
-{% block title %}
-    Register
-{% endblock %}
+{% block title %} Register {% endblock %} 
 
 {% block main %}
     <h2>Register</h2>
-    <h3>Create an account to place orders on this site!</h3>      
+    <h3>Create an account to place orders on this site!</h3>
     <p>
-        Note: You can't pay through the site directly just yet. 
-        When you have placed an order and have talked to us in person, 
-        we'll keep records of your order and send you status updates via email.
+        Note: You can't pay through the site directly just yet. When you have placed
+        an order and have talked to us in person, we'll keep records of your order
+        and send you status updates via email.
     </p>
-        </a></p>
     <form action="/register" method="post">
-        <div class="mb-3">
-            <input autocomplete="off" autofocus class="form-control mx-auto w-auto" name="email" placeholder="Email" type="email">
+        <div class="form-group">
+            <input
+                type="email"
+                class="form-control"
+                id="email"
+                name="email"
+                aria-describedby="emailHelp"
+                placeholder="Enter email"
+            />
+            <small id="emailHelp" class="form-text text-muted"
+                >We'll never share your email with anyone else.</small
+            >
         </div>
-        <div class="mb-3">
-            <input autocomplete="off" autofocus name="username" placeholder="Username" type="text">
+        <div class="form-group">
+            <input
+                type="password"
+                class="form-control"
+                id="password"
+                name="password"
+                placeholder="Password"
+            />
         </div>
-        <div class="mb-3">
-            <input name="password" placeholder="Password" type="password">
+        <div class="form-group">
+            <input
+                type="password"
+                class="form-control"
+                id="confirmation"
+                name="confirmation"
+                placeholder="Confirm Password"
+            />
         </div>
-        <div class="mb-3">
-            <input name="confirmation" placeholder="Confirm Password" type="password">
-        </div>
-        <button class="btn btn-primary" type="submit">Log In</button>
+        <button type="submit" class="btn btn-primary">Submit</button>
     </form>
-    <p id="error">Error: {{error}}</p>
+    <p class="mt-3">Already have an account? <a href="/login">Log in here</a>.</p>
+    {% if error %}
+        <p class="text-danger">Error: {{error}}</p>
+    {% endif %} 
 {% endblock %}

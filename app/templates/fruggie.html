@@ -1,0 +1,42 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    {{ fruggie.name }}
+{% endblock %}
+
+{% block main %}
+    <a href="/fruggies">< Back to Fruggies</a>
+    <div class="container">
+        {% if fruggie.image %}
+            <img src="{{ fruggie.image }}" alt="{{ fruggie.name }}">
+        {% else %}
+            <p>No image available.</p>
+        {% endif %}
+    </div>
+    <div class="container">
+        <h2>{{ fruggie.name }}</h2>
+        <p>{{ fruggie.description | default('No description provided.', true)}}</p>
+        <p>Price: {{ fruggie.price | usd }}</p>
+    </div>
+    <div class="container">
+        <form action="/cart/add" method="post">
+            <input type="hidden" name="fruggie_id" value="{{ fruggie.id }}">
+            <div class="form-group">
+                <label for="accessory">
+                    Add an accessory for $0.50 (select "None" if you don't want one):
+                </label>
+                <select class="form-control" id="accessory" name="accessory_id">
+                    <option value="0">None</option>
+                    {% for accessory in accessories %}
+                        <option value="{{ accessory.id }}">{{ accessory.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="quantity">Quantity:</label>
+                <input type="number" id="quantity" name="quantity" min="1" value="1" class="form-control">
+            </div>
+            <button type="submit" class="btn btn-primary">Add to Cart</button>
+        </form>
+    </div>
+{% endblock %}

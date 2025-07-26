@@ -1,0 +1,39 @@
+{% extends 'layout.html' %}
+
+{% block title %} Cart {% endblock %}
+
+{% block main %}
+    <h2>Your Cart</h2>
+    {% if cart_items %}
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Fruggie</th>
+                    <th>Accessory</th>
+                    <th>Quantity</th>
+                    <th>Unit Price</th>
+                    <th>Total Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in cart_items %}
+                    <tr>
+                        <td>{{ item.fruggie.name }}</td>
+                        <td>{{ item.accessory.name if item.accessory else 'No accessory' }}</td>
+                        <td>{{ item.quantity }}</td>
+                        <td>{{ item.unit_price | usd }}</td>
+                        <td>{{ item.total_price | usd }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <p>Total: {{ total_price | usd }}</p>
+        <a href="/fruggies" class="btn btn-primary">Continue Shopping</a>
+        <form action="/cart/checkout" method="post">
+            <button type="submit" class="btn btn-success">Place order</button>
+        </form>
+    {% else %}
+        <p>Your cart is empty.</p>
+        <a href="/fruggies" class="btn btn-primary">Start  Shopping</a>
+    {% endif %}
+{% endblock %}

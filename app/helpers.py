@@ -8,7 +8,7 @@ from functools import wraps
 app = Flask(__name__)
 
 def get_db_connection():
-    conn = sqlite3.connect('fruggie.db')
+    conn = sqlite3.connect('fruggies.db')
     return conn
 
 

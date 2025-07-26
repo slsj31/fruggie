@@ -1,0 +1,13 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    Order Confirmation
+{% endblock %}
+
+{% block main %}
+    <h2>Order Confirmation</h2>
+    <p>Thank you for your order!</p>
+    <p>Your order ID is: <strong>{{ order_id }}</strong></p>
+    <p>We will send you an email confirmation shortly.</p>
+    <a href="/fruggies" class="btn btn-primary">Continue Shopping</a>
+{% endblock %}
