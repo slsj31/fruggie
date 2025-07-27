@@ -10,6 +10,7 @@ def get_db_connection():
     conn = sqlite3.connect('fruggies.db')
     return conn
 
+
 def slugify(s):
     """Convert string to URL-friendly slug."""
     return re.sub(r'[\W_]+', '-', s.strip().lower())
