@@ -6,7 +6,7 @@ A flask web app with multiple features of a typical online shop. I created it be
 ##### app.py
 Contains many Flask features and handles all of the backend of my project.
 ##### helpers.py
-Defines five useful functions for app.py: `get_db_connection()` to get a connection to the `fruggies.db` database, `slugify()` to convert item names into url-friendly slugs (see `fruggie.html`), `login_required()` to decorate routes to require login, and `usd()` to format values as usd in webpages that need it.
+Defines four useful functions for app.py: `get_db_connection()` to get a connection to the `fruggies.db` database, `slugify()` to convert item names into url-friendly slugs (see `fruggie.html`), `login_required()` to decorate routes to require login, and `usd()` to format values as usd in webpages that need it.
 ##### layout.html
 The layout that nearly every other webpage follows by using jinja syntax. Contains a basic bootstrap navbar with links to most pages on the site. By using flask-session and a jinja `{% if %}` conditional to check if there is a user_id present in the current session, this navbar will display "Register" and "Log in" links when the user is signed out and "View Account" and "Logout" links when the user is logged in. The "About" and "View Account" links are disabled since they currently don't link to anything.
 ##### index.html
