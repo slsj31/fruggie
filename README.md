@@ -71,7 +71,7 @@ Similarly to register.html, displays a simple Bootstrap form that allows the use
 ##### order-confirmation
 Uses `cursor.lastrowid` during checkout to display the autoincrementing id of the user's order. 
 ##### fruggies.db
-Holds user data and product info.
+Holds user data, order info, and product info.
 
 Schema:
 ```
