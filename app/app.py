@@ -23,6 +23,7 @@ Session(app)
 FRUGGIE_PRICE = 3
 ACCESSORY_PRICE = 0.5
 
+
 @app.route('/')
 def index():
     """Render the home page"""
