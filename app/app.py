@@ -50,7 +50,7 @@ def fruggies():
             'name': fruggie[1],
             'description': fruggie[2],
             'size': fruggie[3],
-            'price': 3,
+            'price': FRUGGIE_PRICE,
         }
         fruggies_list.append(fruggie_dict)
 
