@@ -100,6 +100,12 @@ def fruggie(slug):
     return redirect("/fruggies")
 
 
+@app.route("/about")
+def about():
+    """Render the about page"""
+    return render_template("about.html")
+
+
 @app.route("/register", methods=["GET", "POST"])
 def register():
     """Register user"""

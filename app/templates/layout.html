@@ -1,3 +1,13 @@
+{% set navigation_bar = [
+    ('/', 'index', 'Index', 'any'),
+    ('/fruggies', 'fruggies', 'Fruggies', 'any'),
+    ('/about', 'about', 'About', 'any'),
+    ('/view-cart', 'cart', 'Cart', 'any'),
+    ('/register', 'register', 'Register', 'logged_out'),
+    ('/login', 'login', 'Login', 'logged_out'),
+    ('/logout', 'logout', 'Logout', 'logged_in')
+] %}
+{% set active_page = active_page|default('index') %}
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -16,16 +26,15 @@
                 <div class="container-fluid">
                     <div class="navbar-nav">
                         <a class="navbar-brand" href="/">Fruggie</a>
-                        <a class="nav-link" href="/fruggies">Fruggies</a>
-                        <a class="nav-link disabled" href="/about">About</a>
-                        <a class="nav-link" href="/cart">View Cart</a>
-                        {% if session["user_id"] %}
-                            <a class="nav-link disabled" href="/account">View Account</a>
-                            <a class="nav-link" href="/logout">Logout</a>
-                        {% else %}
-                            <a class="nav-link" href="/register">Register</a>
-                            <a class="nav-link" href="/login">Login</a>
-                        {% endif %}
+                        {% for href, id, caption, auth in navigation_bar %}
+                            {% if auth == 'any' or (auth == 'logged_in' and session['user_id']) or (auth == 'logged_out' and not session['user_id']) %}
+                                <a 
+                                    class="nav-link {% if active_page == id %}active{% endif %}" 
+                                    href="{{ href }}">
+                                    {{ caption }}
+                                </a>
+                            {% endif %}
+                        {% endfor %}
                     </div>
                 </div>
             </nav>
