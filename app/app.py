@@ -28,7 +28,7 @@ ACCESSORY_PRICE = 0.5
 class Fruggie:
     """Class representing a frug"""
     
-    def __init__(self, id, name="missing_name", description=None, size=None):
+    def __init__(self, id, name, description=None, size=None):
         self.id = id
         self.name = name
         self.description = description
