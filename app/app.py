@@ -24,6 +24,27 @@ FRUGGIE_PRICE = 3
 ACCESSORY_PRICE = 0.5
 
 
+# Classes for fruggies and accessories
+class Fruggie:
+    """Class representing a frug"""
+    
+    def __init__(self, id, name="missing_name", description=None, size=None):
+        self.id = id
+        self.name = name
+        self.description = description
+        self.size = size
+        self.price = FRUGGIE_PRICE
+
+class Accessory:
+    """Class representing an accessory"""
+    
+    def __init__(self, id, name, description):
+        self.id = id
+        self.name = name
+        self.description = description
+        self.price = ACCESSORY_PRICE
+
+
 @app.route('/')
 def index():
     """Render the home page"""
@@ -48,17 +69,10 @@ def pick_fruggies():
     cursor.close()
     conn.close()
 
-    # Convert to a list of dictionaries
+    # Convert to a list of fruggie objects
     fruggies_list = []
     for fruggie in fruggies:
-        fruggie_dict = {
-            'id': fruggie[0],
-            'name': fruggie[1],
-            'description': fruggie[2],
-            'size': fruggie[3],
-            'price': 3,
-        }
-        fruggies_list.append(fruggie_dict)
+        fruggies_list.append(Fruggie(*fruggie))
 
     return render_template("pick-fruggies.html", fruggies=fruggies_list)
 
@@ -96,23 +110,13 @@ def fruggie(slug):
     # Convert accessories to a list of dictionaries
     accessories_list = []
     for accessory in accessories:
-        accessory_dict = {
-            'id': accessory[0],
-            'name': accessory[1],
-        }
-        accessories_list.append(accessory_dict)
+        accessories_list.append(Accessory(*accessory))
 
     # Find the item with a matching slugified name
     for fruggie in fruggies:
-        fruggie_dict = {
-            'id': fruggie[0],
-            'name': fruggie[1],
-            'description': fruggie[2],
-            'price': FRUGGIE_PRICE,
-        }
-
-        if slug == re.sub(r'[\W_]+', '-', fruggie_dict['name'].strip().lower()):
-            return render_template("fruggie.html", fruggie=fruggie_dict, accessories=accessories_list)
+        fruggie = Fruggie(*fruggie)
+        if slug == re.sub(r'[\W_]+', '-', fruggie.name.strip().lower()):
+            return render_template("fruggie.html", fruggie=fruggie, accessories=accessories_list)
 
     # If not found, redirect to the fruggies page
     return redirect("/fruggies")
