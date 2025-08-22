@@ -32,6 +32,12 @@ def index():
 
 @app.route('/fruggies')
 def fruggies():
+    """Redirect to the fruggies page"""
+    return redirect("/fruggies/pick-fruggies")
+
+
+@app.route('/fruggies/pick-fruggies')
+def pick_fruggies():
     """Render the fruggies page"""
     conn = get_db_connection()
     cursor = conn.cursor()
@@ -54,7 +60,19 @@ def fruggies():
         }
         fruggies_list.append(fruggie_dict)
 
-    return render_template("fruggies.html", fruggies=fruggies_list)
+    return render_template("pick-fruggies.html", fruggies=fruggies_list)
+
+
+@app.route('/fruggies/add-accessories')
+def add_accessories():
+    """Render the accessories page"""
+    return render_template("add-accessories.html")
+
+
+@app.route('/fruggies/view-details')
+def view_details():
+    """Render the view details page"""
+    return render_template("view-details.html")
 
       
 @app.route('/fruggies/<slug>')

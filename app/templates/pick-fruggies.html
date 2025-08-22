@@ -1,0 +1,37 @@
+{% extends 'fruggies-layout.html' %}
+{% set active_page = "pick-fruggies" %}
+
+{% block title %} Pick Fruggies {% endblock %}
+
+{% block main %}
+<div class="row">
+        {% for fruggie in fruggies %}
+            <div class="col-md-2">
+                <div class="card">
+                    {% if fruggie.image %}
+                        <img
+                            src="{{ fruggie.image }}"
+                            class="card-img-top"
+                            alt="{{ fruggie.name }}"
+                        />
+                    {% else %}
+                        <p>No image available.</p>
+                    {% endif %}
+                    <div class="card-body">
+                        <h5 class="card-title">{{ fruggie.name }}</h5>
+                        <p class="card-text">
+                            {{ fruggie.description | default('No description provided.',
+                            true)}}
+                        </p>
+                        <a
+                            class="btn btn-primary"
+                            href="/fruggies/{{ fruggie.name | slugify }}"
+                            role="button"
+                            >Add</a
+                        >
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
